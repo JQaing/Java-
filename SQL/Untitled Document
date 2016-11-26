@@ -1,0 +1,23 @@
+Column count doesn't match value count at row 1
+
+create procedure append()
+     declare @i int;
+     set @i=1;
+     while(@i<=10000)
+     begin
+     insert into t_student(stu_name,gender,age,address) values('姓名1',2,30,'江西师范大学');
+     set @i=@i+1;
+     end
+
+
+create  procedure test01() 
+begin
+declare v_cnt decimal (10)  default 0 ;
+dd:loop 
+          insert into t_student(stu_name,gender,age,address) values('姓名1',2,30,'江西师范大学');
+                  commit;
+                    set v_cnt = v_cnt+10 ;
+                           if  v_cnt = 10000 then leave dd;
+                          end if;
+         end loop dd;
+end;
